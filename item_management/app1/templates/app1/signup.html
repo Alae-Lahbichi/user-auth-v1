@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "css/register.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>singup page</title>
+</head>
+<body>
+    <div class="container">
+        
+        <form action=" {% url "projet:signup" %} " method="post" class="form-info">
+            <h1>Register Now</h1>
+            {% csrf_token %}
+            {% for field in form  %}
+            {% if field.name != "usable_password" %}
+            <div class="box">
+                {{ field }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            <div class="fonction">
+                    <a href=" {% url "projet:login" %} ">Sign In</a>
+            </div>
+            <div class="erreur">
+                {% for message in messages  %}
+                <span id="erreur"> {{ message }} </span>
+                {% endfor %}
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>
